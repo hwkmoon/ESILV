@@ -1,0 +1,38 @@
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.exe.config
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.exe
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.pdb
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MySql.Data.dll
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.csprojResolveAssemblyReference.cache
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MainWindow.g.cs
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Ajout.g.cs
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Recherche.g.cs
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\App.g.cs
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham_MarkupCompile.cache
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham_MarkupCompile.lref
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MainWindow.baml
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Ajout.baml
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Recherche.baml
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.g.resources
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.Properties.Resources.resources
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.csproj.GenerateResource.Cache
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.exe
+C:\Users\Hicham\Documents\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.pdb
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.exe.config
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.exe
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.pdb
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.exe
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MVC_GRD_KORTBI_Hicham.pdb
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\bin\Debug\MySql.Data.dll
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.csprojResolveAssemblyReference.cache
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MainWindow.g.cs
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Ajout.g.cs
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Recherche.g.cs
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\App.g.cs
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham_MarkupCompile.cache
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham_MarkupCompile.lref
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MainWindow.baml
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Ajout.baml
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\V_Recherche.baml
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.g.resources
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.Properties.Resources.resources
+C:\Users\Hicham\Documents\ESILV\3ème année\MVC -données et interfaces\MVC_GRD_KORTBI\MVC_GRD_KORTBI_Hicham\MVC_GRD_KORTBI_Hicham\obj\Debug\MVC_GRD_KORTBI_Hicham.csproj.GenerateResource.Cache

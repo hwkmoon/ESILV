@@ -1,0 +1,104 @@
+﻿<Window x:Class="WpfAlcootest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAlcootest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="725" Width="1000">
+    <Window.DataContext>
+        <local:CalculA/>
+    </Window.DataContext>
+    <Window.Resources>
+        <ImageBrush x:Key="ImageBrush" ImageSource="Images/beer.jpg" Stretch="Fill"/>
+        <ImageBrush x:Key="ImageBrush1" ImageSource="Images/light-beer.jpg" Stretch="Fill"/>
+        <ImageBrush x:Key="ImageBrush2" ImageSource="Images/wine.jpg" Stretch="Uniform"/>
+        <ImageBrush x:Key="ImageBrush4" ImageSource="Images/plus.jpg" Stretch="UniformToFill"/>
+        <ImageBrush x:Key="ImageBrush5" ImageSource="Images/minus.jpg" Stretch="UniformToFill"/>
+    </Window.Resources>
+    <Grid Background="AliceBlue">
+        <Grid.Resources>
+            <ImageBrush x:Key="ImageBrush" ImageSource="Images/beer.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="ImageBrush1" ImageSource="Images/light-beer.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="ImageBrush2" ImageSource="Images/wine.jpg" Stretch="Fill"/>
+            <ImageBrush x:Key="ImageBrush3" ImageSource="Images/spirit.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="ImageBrush4" ImageSource="Images/plus.jpg" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="ImageBrush5" ImageSource="Images/minus.jpg" Stretch="UniformToFill"/>
+        </Grid.Resources>
+        <Label x:Name="label" Content="Alcohol Level" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Height="33" Margin="182,10,197,0" VerticalAlignment="Top" Width="138"/>
+        <Label x:Name="label1" Content="Informations" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="230,62,0,0" VerticalAlignment="Top" Width="102"/>
+        <Label x:Name="label2" FontSize="13" Content="Nom" HorizontalAlignment="Left" Margin="37,98,0,0" VerticalAlignment="Top" Width="40"/>
+        <TextBox x:Name="textBoxNom" HorizontalAlignment="Left" Height="23" Margin="94,102,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152"/>
+        <Label x:Name="label2_Copy" FontSize="13" Content="Prénom" HorizontalAlignment="Left" Margin="277,98,0,0" VerticalAlignment="Top" Width="54" RenderTransformOrigin="0.5,1"/>
+        <TextBox x:Name="textBoxPrenom" HorizontalAlignment="Left" Height="23" Margin="352,102,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="152"/>
+        <Label x:Name="label2_Copy1" FontSize="13" Content="Sexe" HorizontalAlignment="Left" Margin="37,136,0,0" VerticalAlignment="Top" Width="40"/>
+        <CheckBox x:Name="checkBoxM"  FontSize="13" Content="M" HorizontalAlignment="Left" Margin="94,142,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="checkBoxF"  FontSize="13"  Content="F" HorizontalAlignment="Left" Margin="159,142,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label2_Copy2" FontSize="13" Content="Poids (en livres)" HorizontalAlignment="Left" Margin="230,136,0,0" VerticalAlignment="Top" Width="101"/>
+        <TextBox x:Name="textBoxPoids" HorizontalAlignment="Left" Height="23" Margin="352,140,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox3,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="label1_Copy" Content="Nombre de consommations" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="159,168,0,0" VerticalAlignment="Top" Width="210"/>
+        <Button x:Name="button" Content="" HorizontalAlignment="Left" Margin="37,217,0,0" VerticalAlignment="Top" Width="75" Height="108" Background="{StaticResource ImageBrush}" Click="button_Click_1"/>
+        <Button x:Name="button_Copy" Content="" HorizontalAlignment="Left" Margin="171,217,0,0" VerticalAlignment="Top" Width="75" Height="108" Background="{StaticResource ImageBrush1}" Click="button_Copy_Click"/>
+        <Button x:Name="button_Copy1" Content="" HorizontalAlignment="Left" Margin="304,217,0,0" VerticalAlignment="Top" Width="75" Height="108" Background="{StaticResource ImageBrush2}" Click="button_Copy1_Click"/>
+        <Button x:Name="button_Copy2" Content="" HorizontalAlignment="Left" Margin="442,217,0,0" VerticalAlignment="Top" Width="75" Height="108" Background="{StaticResource ImageBrush3}" Click="button_Copy2_Click_1"/>
+        <Label x:Name="label3" Content="Bière" HorizontalAlignment="Left" Height="26" Margin="55,194,0,0" VerticalAlignment="Top" Width="43"/>
+        <Label x:Name="label3_Copy" Content="Bière légère" HorizontalAlignment="Left" Height="26" Margin="171,194,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="label3_Copy1" Content="Vin" HorizontalAlignment="Left" Height="26" Margin="324,194,0,0" VerticalAlignment="Top" Width="32"/>
+        <Label x:Name="label3_Copy2" Content="Spiritueux" HorizontalAlignment="Left" Height="26" Margin="442,194,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="9.488,0"/>
+        <Label x:Name="label1_Copy1" Content="Nombre d'heures depuis la :" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="595,181,0,0" VerticalAlignment="Top" Width="221"/>
+        <Label x:Name="label4" Content="Première consommation" FontSize="13" HorizontalAlignment="Left" Margin="595,217,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label4_Copy" FontSize="13" Content="Dernière consommation" HorizontalAlignment="Left" Margin="595,249,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxPremiere" HorizontalAlignment="Left" Height="27" Margin="765,217,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox6,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" VerticalAlignment="Top" Width="51"/>
+        <TextBox x:Name="textBoxDerniere" HorizontalAlignment="Left" Height="27" Margin="765,249,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox7,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="16" VerticalAlignment="Top" Width="51"/>
+        <Label x:Name="label1_Copy2" Content="Optionnels" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="744,62,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label x:Name="label5" Content="Si votre taux d'alcoolémie vous le permet, &#x0a;seriez-vous prêt à être le SAM? " FontSize="13" HorizontalAlignment="Left" Height="48" Margin="533,98,0,0" VerticalAlignment="Top" Width="258" TextOptions.TextHintingMode="Animated" TextOptions.TextFormattingMode="Display"/>
+        <CheckBox x:Name="checkBoxOui" Content="Oui" HorizontalAlignment="Left" Height="20" Margin="796,115,0,0" VerticalAlignment="Top" Width="42"/>
+        <CheckBox x:Name="checkBoxNon" Content="Non" HorizontalAlignment="Left" Height="20" Margin="852,115,0,0" VerticalAlignment="Top" Width="42"/>
+        <Label x:Name="label6" Content="N°de mobile" HorizontalAlignment="Left" Height="23" Margin="533,152,0,0" VerticalAlignment="Top" Width="81"/>
+        <TextBox x:Name="textBoxNumero" HorizontalAlignment="Left" Height="17" Margin="616,155,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox4,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="115"/>
+        <Label x:Name="label1_Copy3" Content="Résultats" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="235,411,0,0" VerticalAlignment="Top" Width="88"/>
+        <Label x:Name="label7" FontSize="13" Content="Taux d'alcoolémie actuel : " HorizontalAlignment="Left" Margin="37,447,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.25,-0.538" Width="162"/>
+        <Label x:Name="label8" Content="{Binding Path=Label1,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="27" Margin="194,447,0,0" VerticalAlignment="Top" Width="53"/>
+        <Label x:Name="label9" Content="g/l" FontSize="13" HorizontalAlignment="Left" Height="27" Margin="247,447,0,0" VerticalAlignment="Top" Width="36"/>
+        <Label x:Name="label10" FontWeight="Bold" HorizontalContentAlignment="Center" FontSize="20" Content="" HorizontalAlignment="Left" Height="44" Margin="83,496,0,0" VerticalAlignment="Top" Width="382"/>
+        <Label x:Name="label1_Copy4" Content="Liste et SAM disponibles" FontSize="16" FontWeight="DemiBold" FontStyle="Italic" HorizontalAlignment="Left" Margin="662,328,0,0" VerticalAlignment="Top" Width="232"/>
+        <ListView x:Name="listView" HorizontalContentAlignment="Stretch" HorizontalAlignment="Left" Height="273" Margin="518,366,0,0" VerticalAlignment="Top" Width="464">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nom" Width="60" DisplayMemberBinding="{Binding Path=Nom,Mode=TwoWay}" />
+                    <GridViewColumn Header="Prénom" Width="60" DisplayMemberBinding="{Binding Path=Prenom,Mode=TwoWay}" />
+                    <GridViewColumn Header="Sexe" Width="30" DisplayMemberBinding="{Binding Path=Sexe,Mode=TwoWay}" />
+                    <GridViewColumn Header="Poids" Width="40" DisplayMemberBinding="{Binding Path=Poids,Mode=TwoWay}" />
+                    <GridViewColumn Header="Alcoolémie" Width="70" DisplayMemberBinding="{Binding Path=Alcoolemie,Mode=TwoWay}" />
+                    <GridViewColumn Header="SAM" Width="35" DisplayMemberBinding="{Binding Path=Sam,Mode=TwoWay}" />
+                    <GridViewColumn Header="Mobile" Width="75" DisplayMemberBinding="{Binding Path=Numero,Mode=TwoWay}" />
+                    <GridViewColumn Header="Adresse" Width="85" DisplayMemberBinding="{Binding Path=Ville,Mode=TwoWay}" />
+                </GridView>
+            </ListView.View>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+        <Label x:Name="label6_Copy" Content="Adresse (ville)" HorizontalAlignment="Left" Height="23" Margin="763,152,0,0" VerticalAlignment="Top" Width="85"/>
+        <TextBox x:Name="textBoxVille" HorizontalAlignment="Left" Height="17" Margin="863,155,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox5,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="103"/>
+        <Image x:Name="image" HorizontalAlignment="Left" Height="116" Margin="12,568,0,0" Source="Images/esilv.jpg"  VerticalAlignment="Top" Width="234"/>
+        <Label x:Name="label11" FontWeight="Bold" FontSize="13" Content="Groupe IF1:&#x0a;ASADULLAH Ousman&#x0a;TAMAGNO Vincent&#x0a;ALLAERD Bastien&#x0a;AKOLLOR Jean-Livio&#x0a;KORTBI Hicham" HorizontalAlignment="Left" Height="116" Margin="189,568,0,0" VerticalAlignment="Top" Width="146"/>
+        <TextBox x:Name="textBoxBiere" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="53,328,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox8,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="45" />
+        <TextBox x:Name="textBoxBiereL" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="189,328,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox9,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="textBoxVin" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="324,328,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox10,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="45"/>
+        <TextBox x:Name="textBoxSpiritueux" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="22" Margin="459,328,0,0" TextWrapping="Wrap" Text="{Binding Path=ValeurTextBox11,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="45"/>
+        <Button x:Name="button1" Click="button_Click" Content="Calcul Taux d'Alcoolémie" FontWeight="Bold" Background="Yellow" HorizontalAlignment="Left" Height="27" Margin="189,355,0,0" VerticalAlignment="Top" Width="190"/>
+        <Label x:Name="label12" FontSize="13" Content="Temps restant :" HorizontalAlignment="Left" Height="27" Margin="304,447,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="label13" HorizontalContentAlignment="Center" Content="{Binding Path=Label2,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Height="27" Margin="403,447,0,0" VerticalAlignment="Top" Width="53" RenderTransformOrigin="2.943,0.407"/>
+        <Label x:Name="label9_Copy" Content="(heures)" FontSize="13" HorizontalAlignment="Left" Height="27" Margin="456,447,0,0" VerticalAlignment="Top" Width="57"/>
+        <Button x:Name="button3" Content="Reset" Background="Red" FontWeight="Bold" FontSize="13" HorizontalAlignment="Left" Height="31" Margin="699,653,0,0" VerticalAlignment="Top" Width="139" Click="button3_Click"/>
+        <Button x:Name="button4" Content="" Background="{StaticResource ImageBrush4}" HorizontalAlignment="Left" Margin="908,217,0,0" VerticalAlignment="Top" Width="29" Height="27" RenderTransformOrigin="-0.086,0.611" Click="button4_Click"/>
+        <Button x:Name="button4_Copy" Content="" Background="{StaticResource ImageBrush4}" HorizontalAlignment="Left" Margin="908,249,0,0" VerticalAlignment="Top" Width="29" Height="27" RenderTransformOrigin="-0.086,0.611" Click="button4_Copy_Click"/>
+        <Button x:Name="button4_Copy1" Content="" Background="{StaticResource ImageBrush5}" HorizontalAlignment="Left" Margin="852,217,0,0" VerticalAlignment="Top" Width="29" Height="27" RenderTransformOrigin="-0.086,0.611" Click="button4_Copy1_Click"/>
+        <Button x:Name="button4_Copy2" Content="" Background="{StaticResource ImageBrush5}" HorizontalAlignment="Left" Margin="852,249,0,0" VerticalAlignment="Top" Width="29" Height="27" RenderTransformOrigin="-0.086,0.611" Click="button4_Copy2_Click"/>
+
+
+    </Grid>
+</Window>

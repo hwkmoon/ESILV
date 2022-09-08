@@ -1,0 +1,1446 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DevZest.Licensing</name>
+    </assembly>
+    <members>
+        <member name="T:DevZest.Licensing.AssemblyInfo">
+            <summary>Provides properties for getting the information about the assembly file, such as the version number, product information, public key xml, and so on.</summary>
+            <remarks>When create a new instance of <see cref="T:DevZest.Licensing.AssemblyInfo"/> class, the assembly is loaded in another <see cref="T:System.AppDomain"/>. This <see cref="T:System.AppDomain"/> is unloaded
+            after getting the information about the assembly.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyInfo.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.AssemblyInfo" /> class with the specified assembly file.</summary>
+            <param name="assemblyFile">The assembly file for which to obtain the information.</param>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.Product">
+            <summary>Gets the product information.</summary>
+            <value>The product information.</value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.AssemblyVersion">
+            <summary>Gets the assembly version.</summary>
+            <value>The assembly version.</value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.AssemblyFileVersion">
+            <summary>Gets the assembly file version.</summary>
+            <value>The assembly file version.</value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.ReleaseDate">
+            <summary>Gets the release date.</summary>
+            <value>The release date converted from the Build number of <see cref="P:DevZest.Licensing.AssemblyInfo.AssemblyFileVersion"/> (days since Jan. 1, 2000).</value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.AssemblyData">
+            <summary>Gets the assembly data.</summary>
+            <value>The assembly data returned by <see cref="O:DevZest.Licensing.AssemblyLicense.GetAssemblyData"/></value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.LicenseItems">
+            <summary>Gets the license items defined in the assembly.</summary>
+            <value>The collection of KeyValuePair for the license items defined, the name as the key and the description as value.</value>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyInfo.PublicKeyXml">
+            <summary>Gets the public key XML.</summary>
+            <value>The public key XML.</value>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyInfo.GetReleaseDate(System.Version)">
+            <summary>Gets release date from the specified version number.</summary>
+            <param name="version">The specified version number</param>
+            <returns>The release date, calculated from the build number of the version number, since Jan 1, 2000.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.AssemblyLicense">
+            <summary>Represents the license that can be validated against the calling assembly.</summary>
+            <remarks><para>When publishing an <see cref="T:DevZest.Licensing.AssemblyLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="O:DevZest.Licensing.AssemblyLicense.GetAssemblyData">AssemblyLicense.GetAssemblyData</see>, otherwise the validation will always fail.</para>
+            <para>The <see cref="T:DevZest.Licensing.AssemblyLicense" /> is loaded by <see cref="T:DevZest.Licensing.AssemblyLicenseProviderAttribute" />.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicense.Validate">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicense.GetAssemblyData(System.Reflection.Assembly)">
+            <overloads>Gets the data for the specified calling assembly.</overloads>
+            <summary>Gets the data for the specified calling assembly.</summary>
+            <param name="assembly">The specified calling assembly.</param>
+            <returns><see langword="string" /> represents the calling assembly.</returns>
+            <remarks>
+            <para>When publishing an <see cref="T:DevZest.Licensing.AssemblyLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="O:DevZest.Licensing.AssemblyLicense.GetAssemblyData">AssemblyLicense.GetAssemblyData</see>,
+            otherwise the validation will always fail.</para>
+            <para>The returned data is formated as "[AssemblyName],[PublicKeyToken]" if the assembly is signed with a strong name,
+            or "[AssemblyName]:[AssemblyHash]" if the assembly is not signed. When assembly is not signed, every compile may result
+            in a different assembly hash, therefore a different AssemblyLicense is required.</para>
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicense.GetAssemblyData(System.String)">
+            <summary>Gets the data for the specified calling assembly file.</summary>
+            <param name="assemblyFile">The path of the calling assembly file.</param>
+            <returns><see langword="string" /> represents the calling assembly file.</returns>
+            <remarks>
+            <para>When publishing an <see cref="T:DevZest.Licensing.AssemblyLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="O:DevZest.Licensing.AssemblyLicense.GetAssemblyData">AssemblyLicense.GetAssemblyData</see>,
+            otherwise the validation will always fail.</para>
+            <para>The returned data is formated as "[AssemblyName],[PublicKeyToken]" if the assembly is signed with a strong name,
+            or "[AssemblyName]:[AssemblyHash]" if the assembly is not signed. When assembly is not signed, every compile may result
+            in a different assembly hash, therefore a different AssemblyLicense is required.</para>
+            </remarks>
+        </member>
+        <member name="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute">
+             <summary>Specifies the assembly license loader.</summary>
+             <remarks>
+             <para>If <see cref="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute"/> does not exist for the caller assembly, the assembly license is retrieved from the embedded resource of
+             the caller assembly. The name of the embedded resource must end with the value returned by <see cref="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.GetAssemblyLicenseFileName(System.Reflection.AssemblyName)">GetAssemblyLicenseFileName</see></para>
+             <para>If <see cref="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute"/> exists for the caller assembly, a <see cref="T:DevZest.Licensing.IAssemblyLicenseLoader"/> instance of
+             <see cref="P:DevZest.Licensing.AssemblyLicenseLoaderAttribute.LoaderType"/> will be created to retrieve the assembly license. This allows the caller assembly to customize the
+             storage of the assembly license.</para>
+            <para>The following example loads the assembly file from the application root directory:</para>
+             <code lang="C#"><![CDATA[
+            [assembly: DevZest.Licensing.EmbeddedAssemblyLicense(typeof(LicenseLoader))]
+            
+            class LicenseLoader : IAssemblyLicenseLoader
+            {
+                public string Load(System.Reflection.Assembly assembly)
+                {
+                    string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AssemblyLicenseProviderAttribute.GetAssemblyLicenseFileName(assembly.GetName()));
+                    if (!File.Exists(filePath))
+                        return null;
+            
+                    return File.ReadAllText(filePath);
+                }
+            }
+            ]]></code>
+            <code lang="VB.Net"><![CDATA[
+            <Assembly: DevZest.Licensing.EmbeddedAssemblyLicense(GetType(MyAssemblyLic.Class1))>
+            
+            Class LicenseLoader
+                Implements IAssemblyLicenseLoader
+                
+                Public Function Load(ByVal assembly As System.Reflection.Assembly) As String
+                    Dim filePath As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, AssemblyLicenseProviderAttribute.GetAssemblyLicenseFileName(assembly.GetName))
+                    If Not File.Exists(filePath) Then
+                        Return Nothing
+                    End If
+                    Return File.ReadAllText(filePath)
+                End Function
+            End Class
+            ]]></code>
+             </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicenseLoaderAttribute.#ctor(System.Type)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute"/>.</summary>
+            <param name="loaderType">The type that implements <see cref="T:DevZest.Licensing.IAssemblyLicenseLoader"/>.</param>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyLicenseLoaderAttribute.LoaderType">
+            <summary>Gets the type that implements <see cref="T:DevZest.Licensing.IAssemblyLicenseLoader"/>.</summary>
+            <value>The type that implements <see cref="T:DevZest.Licensing.IAssemblyLicenseLoader"/>.</value>
+        </member>
+        <member name="T:DevZest.Licensing.AssemblyLicenseProviderAttribute">
+            <summary>Provides license from caller assembly.</summary>
+            <remarks>
+            <para>If <see cref="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute"/> does not exist for the caller assembly, the assembly license is retrieved from the embedded resource of
+            the caller assembly. The name of the embedded resource must end with the value returned by <see cref="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.GetAssemblyLicenseFileName(System.Reflection.AssemblyName)">GetAssemblyLicenseFileName</see></para>
+            <para>If <see cref="T:DevZest.Licensing.AssemblyLicenseLoaderAttribute"/> exists for the caller assembly, a <see cref="T:DevZest.Licensing.IAssemblyLicenseLoader"/> instance of
+            <see cref="P:DevZest.Licensing.AssemblyLicenseLoaderAttribute.LoaderType"/> will be created to retrieve the assembly license. This allows the caller assembly to customize the
+            storage of the assembly license.</para>
+            </remarks>
+        </member>
+        <member name="P:DevZest.Licensing.AssemblyLicenseProviderAttribute.EntryAssemblyOnly">
+            <summary>Gets a value indicates whether only the entry assembly's embedded resources are searched.</summary>
+            <value><see langword="true" /> if only the entry assembly's embedded resources are searched, otherwise <see langword="false" />.
+            The default value is <see langword="false" />.</value>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.ProvideLicense">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.GetAssemblyLicenseFileName(System.Reflection.AssemblyName)">
+            <summary>Gets the file name of the caller assembly's embedded resource.</summary>
+            <param name="assemblyName">The assembly name to be licensed.</param>
+            <returns>The file name of the caller assembly's embedded resource.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.Reset">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.AssemblyLicenseProviderAttribute.GetTraceMessage(DevZest.Licensing.LicenseProviderResult)">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.CachedLicenseProviderAttribute">
+            <summary>Provides cached license.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.CachedLicenseProviderAttribute.ProvideLicense">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.CachedLicenseProviderAttribute.Load">
+            <summary>Loads a <see cref="T:DevZest.Licensing.License" /> when there is no cached value.</summary>
+            <returns>The result of loaded <see cref="T:DevZest.Licensing.License" />.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.CachedLicenseProviderAttribute.Reset">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.CachedLicenseProviderAttribute.GetTraceMessage(DevZest.Licensing.LicenseProviderResult)">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.IAssemblyLicenseLoader">
+            <summary>Defines a method to load assembly license.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.IAssemblyLicenseLoader.Load(System.Reflection.Assembly)">
+            <summary>Loads the assembly license for specified assembly.</summary>
+            <param name="assembly">The specified assembly.</param>
+            <returns>The assembly license.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseProviderResult">
+            <summary>Represents the result of license providers, either a license XML string, or
+            an error message string, plus an addition Data object.</summary>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderResult.Empty">
+            <summary>Represents a <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure with its properties left uninitialized. </summary>
+            <value>The <see cref="T:DevZest.Licensing.LicenseProviderResult"/>.</value>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderResult.FromLicense(System.String)">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure from license XML string.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> from license XML string.</summary>
+            <param name="license">The license XML string.</param>
+            <returns>The created <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="license"/> is null or empty.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderResult.FromLicense(System.String,System.Object)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> from license XML string, with additional data.</summary>
+            <param name="license">The license XML string.</param>
+            <param name="data">The additional data.</param>
+            <returns>The created <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="license"/> is null or empty.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderResult.FromErrorMessage(System.String)">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure from error message string.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure from error message string.</summary>
+            <param name="errorMessage">The error message string.</param>
+            <returns>The created <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="errorMessage"/> is null or empty.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderResult.FromErrorMessage(System.String,System.Object)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure from error message string, with
+            additional data.</summary>
+            <param name="errorMessage">The error message string.</param>
+            <param name="data">The additional data.</param>
+            <returns>The created <see cref="T:DevZest.Licensing.LicenseProviderResult" /> structure.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="errorMessage"/> is null or empty.</exception>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderResult.IsEmpty">
+            <summary>Tests whether all properties of this <see cref="T:DevZest.Licensing.LicenseProviderResult" /> have values of <see langword="null"/>.</summary>
+            <value><see langword="true"/> if the result is empty, otherwise <see langword="false"/>.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderResult.License">
+            <summary>Gets the encapsulated license XML string.</summary>
+            <value>The encapsulated license XML string.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderResult.ErrorMessage">
+            <summary>Gets the encapsulated error message.</summary>
+            <value>The encapsulated error message.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderResult.Data">
+            <summary>Gets the additional data.</summary>
+            <value>The additional data.</value>
+        </member>
+        <member name="T:DevZest.Licensing.FileLicenseProviderAttribute">
+            <summary>Provides license from local file system.</summary>
+            <remarks>This license provider requires <see cref="T:System.Security.Permissions.FileIOPermission" />.
+            If your application or component is target partial trust environment without <see cref="T:System.Security.Permissions.FileIOPermission" />, use
+            <see cref="T:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute" /> instead.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.FileLicenseProviderAttribute.#ctor">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.FileLicenseProviderAttribute" /> class.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.FileLicenseProviderAttribute" /> class.</summary>
+        </member>
+        <member name="P:DevZest.Licensing.FileLicenseProviderAttribute.FolderOption">
+            <summary>Gets or sets a value used to retrieve the directory path of the license file.</summary>
+            <value>The value used to retrieve the directory path of the license file. The default value is <see cref="F:DevZest.Licensing.FolderOption.Assembly"/>.</value>
+        </member>
+        <member name="P:DevZest.Licensing.FileLicenseProviderAttribute.SpecialFolder">
+            <summary>Gets or sets a value used to retrieve directory path to system special folders.</summary>
+            <value>A value used to retrieve directory path to system special folders. The default value is
+            <see cref="F:System.Environment.SpecialFolder.LocalApplicationData" />. This value takes effect only when <see cref="P:DevZest.Licensing.FileLicenseProviderAttribute.FolderOption"/> property
+            is <see cref="F:DevZest.Licensing.FolderOption.EnvironmentSpecial" />.</value>
+        </member>
+        <member name="P:DevZest.Licensing.FileLicenseProviderAttribute.Name">
+            <summary>Gets or sets a value indicates the license file name.</summary>
+            <value>A value indicates the license file name. The default value is ".lic".</value>
+            <remarks>When value of <see cref="P:DevZest.Licensing.FileLicenseProviderAttribute.FolderOption"/> property is <see cref="F:DevZest.Licensing.FolderOption.Assembly" /> and the value
+            starts with ".", a combination of the assembly name and this value will be used. For example, for assembly TestApp.exe,
+            if the value of <see cref="P:DevZest.Licensing.FileLicenseProviderAttribute.FolderOption"/> property is <see cref="F:DevZest.Licensing.FolderOption.Assembly" /> (the default) and
+            the value of <see cref="P:DevZest.Licensing.FileLicenseProviderAttribute.Name" /> property is ".lic" (the default), file name "TestApp.exe.lic" will be used.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.FileLicenseProviderAttribute.Load">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.FolderOption">
+            <summary>Specifies enumerated constants used to retrieve directory paths together with a file name.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.FolderOption.Absolute">
+            <summary>The file name specifies the full path.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.FolderOption.Assembly">
+            <summary>The file name is relative to the assembly.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.FolderOption.EnvironmentSpecial">
+            <summary>A system special folder is used together with the file name.</summary>
+        </member>
+        <member name="T:DevZest.Licensing.Freezable`1">
+            <summary>Represents object that can be frozen for modification.</summary>
+            <typeparam name="T">Type of the freezer.</typeparam>
+        </member>
+        <member name="P:DevZest.Licensing.Freezable`1.IsFrozen">
+            <summary>Gets a value indicates whether this object is currently modifiable.</summary>
+            <value><see langword="true" /> if the object is frozen and cannot be modified; otherwise <see langword="false"/>.</value>
+            <remarks>Attempting to modify this object when its <see cref="P:DevZest.Licensing.Freezable`1.IsFrozen" /> property is set to <see langword="true" /> throws an
+            <see cref="T:System.InvalidOperationException" />. All derived classes should respect this property by calling
+            <see cref="M:DevZest.Licensing.Freezable`1.VerifyFrozenAccess">VerifyFrozenAccess</see> in all public methods and property setters that might modify this object.
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.Freezable`1.VerifyFrozenAccess">
+            <summary>Enforces that this object is modifiable.</summary>
+            <exception cref="T:System.InvalidOperationException">This object is not modifiable.</exception>
+        </member>
+        <member name="T:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute">
+            <summary>Provides license from isolated storage file.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute.#ctor(System.IO.IsolatedStorage.IsolatedStorageScope,System.Type,System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute" /> class.</summary>
+            <param name="scope">A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values.</param>
+            <param name="applicationEvidenceType">An <see cref="T:System.Security.Policy.Evidence" /> object containing the application identity.</param>
+            <param name="path">The path of the isolated storage file.</param>
+        </member>
+        <member name="P:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute.Scope">
+            <summary>Gets the isolation scope.</summary>
+            <value>A bitwise combination of the <see cref="T:System.IO.IsolatedStorage.IsolatedStorageScope" /> values.</value>
+        </member>
+        <member name="P:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute.ApplicationEvidenceType">
+            <summary>Gets the application identity object.</summary>
+            <value>An <see cref="T:System.Security.Policy.Evidence" /> object containing the application identity.</value>
+        </member>
+        <member name="P:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute.Path">
+            <summary>Gets the path of the isolated storage file.</summary>
+            <value>The path of the isolated storage file.</value>
+        </member>
+        <member name="M:DevZest.Licensing.IsolatedStorageFileLicenseProviderAttribute.Load">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.LicenseItemAttribute">
+            <summary>Declares license items of an assembly.</summary>
+            <remarks><see cref="T:DevZest.Licensing.LicenseItemAttribute" /> class declares license items of an assembly and does not participate the license
+            publish nor validation process. The declared license items can have a localizable description so that this information can be
+            used by utility such as License Console.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemAttribute.#ctor(System.String)">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItemAttribute" /> class.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItemAttribute" /> class with specified license item name.</summary>
+            <param name="name">The name of license item.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemAttribute.#ctor(System.String,System.String,System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItemAttribute" /> class with specified license item name and localizable
+            description.</summary>
+            <param name="name">The name of license item.</param>
+            <param name="descriptionResourceBaseName">The resource root name of the description.</param>
+            <param name="descriptionResourceName">The resource name of the description.</param>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItemAttribute.Name">
+            <summary>Gets the license item name.</summary>
+            <value>The license item name.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItemAttribute.DescriptionResourceBaseName">
+            <summary>Gets the resource root name of the description.</summary>
+            <value>The resource root name of the description. For example,  the root name for the resource file named "MyResource.en-US.resources"
+            is "MyResource". </value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItemAttribute.DescriptionResourceName">
+            <summary>Gets the resource name of the description.</summary>
+            <value>The resource name of the description.</value>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemAttribute.GetDescription(System.Reflection.Assembly)">
+            <summary>Gets the descritpion of the license item, using current thread's culture.</summary>
+            <param name="assembly">The assembly.</param>
+            <returns>The description of the license item.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemAttribute.GetDescription(System.Reflection.Assembly,System.Globalization.CultureInfo)">
+            <summary>Gets the descritpion of the license item, using specified culture.</summary>
+            <param name="assembly">The assembly.</param>
+            <param name="culture">The specified culture.</param>
+            <returns>The description of the license item.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseProviderAttribute">
+            <summary>Provides the abstract base class for all license providers.</summary>
+            <remarks>
+            <para>License provider is declared as assembly level attribute. It loads a <see cref="T:DevZest.Licensing.License"/> object from a specified location.</para>
+            <para>When initialized during validation, the license provider is sealed by setting its <see cref="P:DevZest.Licensing.LicenseProviderAttribute.IsFrozen" />
+            property to <see langword="true" />. Any attempting to modify the <see cref="T:DevZest.Licensing.LicenseProviderAttribute" />
+            object throws an <see cref="T:System.InvalidOperationException" />. All derived classes should respect this rule by calling
+            <see cref="M:DevZest.Licensing.LicenseProviderAttribute.VerifyFrozenAccess">VerifyFrozenAccess</see> in all public methods and property setters that
+            might change the object.</para>
+            </remarks>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderAttribute.DesignMode">
+            <summary>Gets or sets a value indicates whether this license provider is to load design time or runtime license.</summary>
+            <value><see langword="true" /> if this license provider is to load design time license, otherwise <see langword="false" />.
+            The default value is <see langword="false" />.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderAttribute.Assembly">
+            <summary>Gets the assembly that this license provider attribute is declared.</summary>
+            <value>The assembly that this license provider attribute is declared.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderAttribute.IsFrozen">
+            <summary>Gets a value indicates whether this license provider is currently modifiable.</summary>
+            <value><see langword="true" /> if this license provider is frozen and cannot be modified; otherwise <see langword="false" />.</value>
+            <remarks>
+            This property value is set to <see langword="true" /> before loading any <see cref="T:DevZest.Licensing.License" />.
+            Attempting to modify a license provider when its <see cref="P:DevZest.Licensing.LicenseProviderAttribute.IsFrozen" /> property is true throws an <see cref="T:System.InvalidOperationException" />.
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderAttribute.VerifyFrozenAccess">
+            <summary>Enforces that this license provider is modifiable.</summary>
+            <exception cref="T:System.InvalidOperationException">This license provider is not modifiable.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderAttribute.ProvideLicense">
+            <summary>Provides the license.</summary>
+            <returns>The result of license provider, either a <see cref="T:DevZest.Licensing.License" /> object or an error message string.</returns>
+            <remarks><para>Derived class should never return <see langword="null"/>, otherwise an exception will be thrown. When
+            multiple license provider attributes declared, the first returned non-null license will be used to validate, in the order
+            of declaration.</para>
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderAttribute.Reset">
+            <summary>Resets this license provider.</summary>
+            <remarks>License provider caches the lookup result by default. Calling this method can enforce license provider to perform
+            a new lookup for the next validation, instead of returning the cached result.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderAttribute.IsTraceEnabled">
+            <summary>Gets a value indicates whether trace is enabled</summary>
+            <value><see langword="true" /> if trace is enabled, otherwise <see langword="false" />.</value>
+            <remarks><para>Tracing is turned off by default. To turn on tracing for this license provider only, set its
+            <see cref="P:DevZest.Licensing.LicenseProviderAttribute.Debug" /> property to <see langword="true" />; to turn on tracing for all license providers
+            globally, add the following section to your application configuration file: </para>
+            <code lang="XML">
+            <![CDATA[
+              <system.diagnostics>
+               <switches>
+                 <add name="DevZest.Licensing" value="true"/>
+               </switches>
+              </system.diagnostics>
+            ]]>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseProviderAttribute.GetTraceMessage(DevZest.Licensing.LicenseProviderResult)">
+            <summary>Gets the diagnostics trace message.</summary>
+            <param name="result">The result of this license provider.</param>
+            <returns>The diagnostics trace message</returns>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseProviderAttribute.Debug">
+            <summary>Gets or sets a value to turn on/off tracing.</summary>
+            <value><see langword="true" /> to turn on tracing of this license provider, otherwise <see langword="false" />.</value>
+            <remarks>
+            <para>To turn on tracing for all license providers globally, add the following section to your application
+            configuration file: </para>
+            <code lang="XML">
+            <![CDATA[
+              <system.diagnostics>
+               <switches>
+                 <add name="DevZest.Licensing" value="true"/>
+               </switches>
+              </system.diagnostics>
+            ]]>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseManager">
+            <summary>Provides static methods to get license from an assembly, determine if a valid license can be granted to an assembly,
+            or reset license providers of an assembly.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String)">
+            <overloads>Determines whether a license can be granted.</overloads>
+            <summary>Determines whether a runtime license can be granted for the specified license item name of executing assembly.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String)">
+            <overloads>Determines whether a license can be granted.</overloads>
+            <summary>Determines whether a runtime license can be granted for the specified license item name of executing assembly.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String,System.Type)">
+            <summary>Determines whether a runtime license can be granted for the specified license item name of the assembly containing specified type.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="type">The type contained by the assembly.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String,System.Type)">
+            <summary>Determines whether a runtime license can be granted for the specified license item name of the assembly containing specified type.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="type">The type contained by the assembly.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String,System.Reflection.Assembly)">
+            <summary>Determines whether a runtime license can be granted for the specified license item name of the specified assembly.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="assembly">The specified assembly.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String,System.Reflection.Assembly)">
+            <summary>Determines whether a runtime license can be granted for the specified license item name of the specified assembly.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="assembly">The specified assembly.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the executing assembly,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the executing assembly,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String,System.Type,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the assembly containing specified type,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="type">The type contained by the assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String,System.Type,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the assembly containing specified type,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="type">The type contained by the assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Validate(System.String,System.Reflection.Assembly,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the specified assembly,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="assembly">The specified assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <remarks><para>This method throws a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License"/> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method does not throw an exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Check(System.String,System.Reflection.Assembly,System.Boolean)">
+            <summary>Determines whether a license can be granted for the specified license item name of the specified assembly,
+            given specified design time or runtime mode.</summary>
+            <param name="licenseItemName">The specified license item name.</param>
+            <param name="assembly">The specified assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true"/> for design time, otherwise runtime.</param>
+            <returns><see langword="null" /> if a valid <see cref="T:DevZest.Licensing.License" /> can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+            <remarks><para>This method does not throw a <see cref="T:DevZest.Licensing.LicenseException" /> when a valid <see cref="T:DevZest.Licensing.License" /> cannot be granted.
+            The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws exception.</para>
+            <para>If the assembly is not licensed, all callers in the call stack will be checked. If any caller assembly is signed with
+            the same strong name key, the validation will succeed. It's not neccessary to provide a <see cref="T:DevZest.Licensing.License" /> for assemblies
+            signed with the same strong name key.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.GetLicense">
+            <overloads>Gets a license for an assembly.</overloads>
+            <summary>Gets a license for executing assembly.</summary>
+            <returns>A <see cref="T:DevZest.Licensing.License" /> object, or <see langword="null" /> for the assembly is not licensed.</returns>
+            <remarks>The returned <see cref="T:DevZest.Licensing.License" /> object may not be able to be granted as a valid license. Call
+            <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method to determine whether a
+            valid license can be granted.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.GetLicense(System.Boolean)">
+            <summary>Gets a license for executing assembly, given specified design time or runtime mode.</summary>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true" /> for design time, otherwise runtime.</param>
+            <returns>A <see cref="T:DevZest.Licensing.License" /> object, or <see langword="null" /> for the assembly is not licensed.</returns>
+            <remarks>The returned <see cref="T:DevZest.Licensing.License" /> object may not be able to be granted as a valid license. Call
+            <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method to determine whether a
+            valid license can be granted.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.GetLicense(System.Type,System.Boolean)">
+            <summary>Gets a license for assembly containing specified type, given specified design time or runtime mode.</summary>
+            <param name="type">The type contained by the assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true" /> for design time, otherwise runtime.</param>
+            <returns>A <see cref="T:DevZest.Licensing.License" /> object, or <see langword="null" /> for the assembly is not licensed.</returns>
+            <remarks>The returned <see cref="T:DevZest.Licensing.License" /> object may not be able to be granted as a valid license. Call
+            <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method to determine whether a
+            valid license can be granted.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.GetLicense(System.Reflection.Assembly,System.Boolean)">
+            <summary>Gets a license for specified assembly, given specified design time or runtime mode.</summary>
+            <param name="assembly">The specified assembly.</param>
+            <param name="designMode">Specifies the design time or runtime mode. <see langword="true" /> for design time, otherwise runtime.</param>
+            <returns>A <see cref="T:DevZest.Licensing.License" /> object, or <see langword="null" /> for the assembly is not licensed.</returns>
+            <remarks>The returned <see cref="T:DevZest.Licensing.License" /> object may not be able to be granted as a valid license. Call
+            <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see> method to determine whether a
+            valid license can be granted.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="assembly" /> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Reset">
+            <overloads>Resets the license providers for an assembly.</overloads>
+            <summary>Resets the license providers for the executing assembly.</summary>
+            <remarks>License providers cache the lookup result by default. Calling this method can enforce license providers to perform
+            a new lookup for the next validation, instead of returning the cached result.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Reset(System.Type)">
+            <summary>Resets the license providers for the assembly containing specified type.</summary>
+            <param name="type">The type contained by the assembly.</param>
+            <remarks>License providers cache the lookup result by default. Calling this method can enforce license providers to perform
+            a new lookup for the next validation, instead of returning the cached result.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="type" /> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.Reset(System.Reflection.Assembly)">
+            <summary>Resets the license providers for specified assembly.</summary>
+            <param name="assembly">The specified assembly.</param>
+            <remarks>License providers cache the lookup result by default. Calling this method can enforce license providers to perform
+            a new lookup for the next validation, instead of returning the cached result.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="assembly" /> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.RsaKey.GetRsaParameters(System.Byte[])">
+            <summary>
+            Returns RSAParameters from byte[].
+            Example to get rsa public key from assembly:
+            byte[] pubkey = System.Reflection.Assembly.GetExecutingAssembly().GetName().GetPublicKey();
+            RSAParameters p = SnkUtil.GetRSAParameters(pubkey);
+            </summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseManager.RsaKey.XmlStringFromSnkFile(System.String)">
+            <summary>Returns RSA object from .snk key file.</summary>
+            Path to snk file.
+            <returns>RSACryptoServiceProvider</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseKey">
+            <summary>Represents a license key that can be used to get <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" />.</summary>
+            <remarks><para>A license key is a 25 digits string that can be used to get a <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" />.
+            The first 24 digits are generated randomly and the last digit is checksum. Use <see cref="M:DevZest.Licensing.LicenseKey.NewLicenseKey">NewLicenseKey</see> to generate
+            a new license key; Use <see cref="M:DevZest.Licensing.LicenseKey.ToString">ToString</see> method to convert <see cref="T:DevZest.Licensing.LicenseKey"/> into a string formatted as
+            "xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"; Use <see cref="M:DevZest.Licensing.LicenseKey.CanConvertFrom(System.String)">CanConvertFrom</see>to determine if the provided string has correct
+            format and checksum.</para>
+            <para><see cref="T:DevZest.Licensing.LicenseKey" /> is also used to encrypt the reponse sent from <see cref="T:DevZest.Licensing.LicensePublisher" /> to
+            <see cref="T:DevZest.Licensing.LicenseClient" />.</para>
+            <para>Since <see cref="T:DevZest.Licensing.LicenseKey" /> can be used to get <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" />, it should be
+            stored as encrypted and never be displayed as clear text by your application.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.#ctor(System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseKey" /> structure.</summary>
+            <param name="key">The string representation of the key.</param>
+            <exception cref="T:System.ArgumentException"><paramref name="key"/> is invalid.</exception>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseKey.Empty">
+            <summary>Gets an empty <see cref="T:DevZest.Licensing.LicenseKey" />.</summary>
+            <value>An empty <see cref="T:DevZest.Licensing.LicenseKey" />.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseKey.IsEmpty">
+            <summary>Determines whether this license key is empty.</summary>
+            <value><see langword="true" /> if this license key is empty. Otherwise <see langword="false"/>.</value>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.NewLicenseKey">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseKey" />.</summary>
+            <returns>A new <see cref="T:DevZest.Licensing.LicenseKey"/> object.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.CanConvertFrom(System.String)">
+            <summary>Determines the specified string can be converted to a <see cref="T:DevZest.Licensing.LicenseKey" />.</summary>
+            <param name="value">The specified string.</param>
+            <returns><see langword="true" /> if the string can be converted, otherwise <see langword="false" />.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.Equals(System.Object)">
+            <exclude/>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.Equals(DevZest.Licensing.LicenseKey,DevZest.Licensing.LicenseKey)">
+            <exclude/>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.op_Equality(DevZest.Licensing.LicenseKey,DevZest.Licensing.LicenseKey)">
+            <exclude/>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.op_Inequality(DevZest.Licensing.LicenseKey,DevZest.Licensing.LicenseKey)">
+            <exclude/>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.GetHashCode">
+            <exclude/>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseKey.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:DevZest.Licensing.LicensePublicKeyAttribute">
+            <summary>Declares the public key used to verify the license.</summary>
+            <remarks>
+             <para><see cref="T:System.Security.Permissions.FileIOPermission" /> is required to get the public key of the assembly. If you plan to distribute your
+             assembly running under partial trust, you need to declare the <see cref="T:DevZest.Licensing.LicensePublicKeyAttribute" /> for your assembly:</para>
+             	<code lang="C#">
+            	<![CDATA[
+            	[assembly: LicensePublicKey("0024000004800000940000000602000000240000525341310004000001000100ed58bddcb7bb199ed08c99bd83f732f26d49db4be3ea11c03a0c01bc0774bdcf5bbd3f00fd853f761598dd28489d9849a27e9eb901bb227d2c88b6644bd8e1b1453d021ea6b724995bdc5f839a608a5aa98f2ba6c602d25eaed7147e8046db369ad5ff0847423d926526176ff43902ee012d98f7010a5987448342107eb632b8")]
+            	]]>
+            </code>
+            <code lang="VB">
+            	<![CDATA[
+            	<assembly: LicensePublicKey("0024000004800000940000000602000000240000525341310004000001000100ed58bddcb7bb199ed08c99bd83f732f26d49db4be3ea11c03a0c01bc0774bdcf5bbd3f00fd853f761598dd28489d9849a27e9eb901bb227d2c88b6644bd8e1b1453d021ea6b724995bdc5f839a608a5aa98f2ba6c602d25eaed7147e8046db369ad5ff0847423d926526176ff43902ee012d98f7010a5987448342107eb632b8")>
+            	]]>
+            </code>
+             <para>Use the command line <application>sn.exe</application> utility to get the public key string from an signed
+             assembly:</para>
+             <command>sn -Tp <replacable>assemblyFile</replacable></command>
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublicKeyAttribute.#ctor(System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicensePublicKeyAttribute" /> class.</summary>
+            <param name="publicKey">
+            <para>The public key hex string. You may use the following command to get the public key hex string:</para>
+            <para><command>sn -Tp <replacable>assemblyFile</replacable></command></para>
+            </param>
+        </member>
+        <member name="P:DevZest.Licensing.LicensePublicKeyAttribute.PublicKey">
+            <summary>Gets the public key hex string.</summary>
+            <value>The public key hex string.</value>
+        </member>
+        <member name="T:DevZest.Licensing.LicensePublisherResponse">
+            <summary>Represents the response sent from license publisher to license client.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisherResponse.#ctor(DevZest.Licensing.License)">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.LicensePublisherResponse" /> object.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicensePublisherResponse" /> object encapsulates a 
+            <see cref="T:DevZest.Licensing.License" /> object.</summary>
+            <param name="license">The encapsulated <see cref="T:DevZest.Licensing.License" /> object.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="license"/> is <see langword="null"/>.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisherResponse.#ctor(System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicensePublisherResponse" /> object encapsulates an error message.</summary>
+            <param name="errorMessage">The encapsulated error message.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="errorMessage"/> is <see langword="null"/> or empty.</exception>
+        </member>
+        <member name="P:DevZest.Licensing.LicensePublisherResponse.License">
+            <summary>Gets the encapsulated <see cref="T:DevZest.Licensing.License"/> object.</summary>
+            <value>The encapsulated <see cref="T:DevZest.Licensing.License"/> object.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicensePublisherResponse.ErrorMessage">
+            <summary>Gets the encapsulated error message.</summary>
+            <value>The encapsulated error message.</value>
+        </member>
+        <member name="T:DevZest.Licensing.RegistryLicenseProviderAttribute">
+            <summary>Provides license from registry.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.RegistryLicenseProviderAttribute.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.RegistryLicenseProviderAttribute" /> class.</summary>
+            <param name="subkeyName">The name or path of the subkey. When ends with "\", a [Major].[Minor] of assembly
+            version will be appended. For example, if <paramref name="subkeyName"/> is "DevZest\.Net Licensing\" and
+            assembly version is 1.0.3368.0, the subkey name "DevZest\.Net Licensing\1.0" will be used.</param>
+            <param name="valueName">The name of the subkey value.</param>
+        </member>
+        <member name="P:DevZest.Licensing.RegistryLicenseProviderAttribute.RegistryHive">
+            <summary>Gets a value indicates the root registry subkey.</summary>
+            <value>The root registry subkey. The default value is <see cref="P:DevZest.Licensing.RegistryLicenseProviderAttribute.RegistryHive">LocalMachine</see>.</value>
+        </member>
+        <member name="P:DevZest.Licensing.RegistryLicenseProviderAttribute.SubkeyName">
+            <summary>Gets the name or path of the subkey.</summary>
+            <value>The name or path of the subkey. When ends with "\", a [Major].[Minor] of assembly version will be appended.
+            For example, if the value is "DevZest\.Net Licensing\" and assembly version is 1.0.3368.0, the subkey name
+            "DevZest\.Net Licensing\1.0" will be used.</value>
+        </member>
+        <member name="P:DevZest.Licensing.RegistryLicenseProviderAttribute.ValueName">
+            <summary>Gets the name of the subkey value.</summary>
+            <value>The name of the subkey value.</value>
+        </member>
+        <member name="M:DevZest.Licensing.RegistryLicenseProviderAttribute.Load">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.UserLicense">
+            <summary>Represents the license that can be validated against the current user.</summary>
+            <remarks>When publishing an <see cref="T:DevZest.Licensing.UserLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="P:DevZest.Licensing.UserLicense.CurrentUserData">UserLicense.CurrentUserData</see>, otherwise the validation will always fail.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.UserLicense.Validate">
+            <exclude />
+        </member>
+        <member name="P:DevZest.Licensing.UserLicense.CurrentUserData">
+            <summary>Gets the data for the current user.</summary>
+            <value><see langword="string" /> represents the current user.</value>
+            <remarks>
+            <para>When publishing an <see cref="T:DevZest.Licensing.UserLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="P:DevZest.Licensing.UserLicense.CurrentUserData">UserLicense.CurrentUserData</see>,
+            otherwise the validation will always fail.</para>
+            <para>The returned data is formated as "[UserName];[SID]".</para>
+            </remarks>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseError">
+            <summary>Identifies the license validation error.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseError.#ctor(System.Reflection.Assembly,DevZest.Licensing.LicenseErrorReason,System.String,DevZest.Licensing.License)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseError" /> class</summary>
+            <param name="assembly">The assembly for the license validation.</param>
+            <param name="reason">The reason for the license validation error.</param>
+            <param name="message">The message for the license validation error.</param>
+            <param name="license">The <see cref="P:DevZest.Licensing.LicenseError.License" /> that fails the validation.</param>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseError.Assembly">
+            <summary>Gets the assembly for the license validation.</summary>
+            <value>The assembly for the license validation.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseError.Reason">
+            <summary>Gets the reason for the license validation error.</summary>
+            <value>The reason for the license validation error.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseError.Message">
+            <summary>Gets the message for the license validation error.</summary>
+            <value>The message for the license validation error.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseError.License">
+            <summary>Gets the <see cref="P:DevZest.Licensing.LicenseError.License" /> that fails the validation.</summary>
+            <value>The <see cref="P:DevZest.Licensing.LicenseError.License" /> that fails the validation.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseError.ExceptionMessage">
+            <summary>Gets the message for the license validation exception.</summary>
+            <value>The message for the license validation exception.</value>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseException">
+            <summary>Represents the exception thrown when license validation failed.</summary>
+            <remarks>The <see cref="O:DevZest.Licensing.LicenseManager.Validate">LicenseManager.Validate</see> method throws 
+            <see cref="T:DevZest.Licensing.LicenseException" /> when validation failed. This occurs when an assembly is either not licensed, or is licensed but
+            cannot be granted a valid license.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.#ctor(DevZest.Licensing.LicenseError)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException" /> class with a specified <see cref="T:DevZest.Licensing.LicenseError" />.</summary>
+            <param name="error">The specified <see cref="T:DevZest.Licensing.LicenseError"/>.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.#ctor">
+            <overloads>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException" /> class.</overloads>
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException" /> class.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.#ctor(System.String)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException"/> class with a specified error message.</summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.#ctor(System.String,System.Exception)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a <see langword="null"/> if no inner exception is specified.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseException"/> class with serialized data.</summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseException.Error">
+            <summary>Gets the <see cref="T:DevZest.Licensing.LicenseError" /> that causes this <see cref="T:DevZest.Licensing.LicenseException" />.</summary>
+            <value>The <see cref="T:DevZest.Licensing.LicenseError"/> that causes this <see cref="T:DevZest.Licensing.LicenseException" />.</value>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <exclude />
+        </member>
+        <member name="T:DevZest.Licensing.ILicensePublisher">
+            <summary>Service contract between <see cref="T:DevZest.Licensing.LicensePublisher" /> and <see cref="T:DevZest.Licensing.LicenseClient" />.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.ILicensePublisher.Publish(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>Publishes the requested license.</summary>
+            <param name="culture">The license client culture LCID.</param>
+            <param name="product">The product name.</param>
+            <param name="version">The product version.</param>
+            <param name="encryptedLicenseKey">The encrypted license key.</param>
+            <param name="category">The license category.</param>
+            <param name="name">The user name.</param>
+            <param name="company">The user company.</param>
+            <param name="email">The user email address.</param>
+            <param name="data">The data to set for the license.</param>
+            <returns>The response sent to license client.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseClient">
+            <summary>Communicates with <see cref="T:DevZest.Licensing.LicensePublisher" /> to get published <see cref="T:DevZest.Licensing.License" />.</summary>
+            <remarks><see cref="T:DevZest.Licensing.LicenseClient" /> is a WCF (Windows Communication Foundation) client object. For WCF client configuration,
+            refer to WCF documentation.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.#ctor(System.String)">
+            <overloads>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseClient" /> class.</overloads>
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseClient" /> class using specified public key XML string
+            and the default target endpoint from the application configuration file.</summary>
+            <param name="publicKeyXml">The public key XML string.</param>
+            <remarks>The <see cref="O:DevZest.Licensing.LicenseClient.PublicKeyXmlFromAssembly">LicenseClient.PublicKeyXmlFromAssembly</see> method returns
+            the public key XML string for specified assembly.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="publicKeyXml"/> is <see langword="null" /> or empty string.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.#ctor(System.String,System.String)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseClient" /> class using specified public key XML string 
+            and the configuration information specified in the application configuration file by endpointConfigurationName.</summary>
+            <param name="publicKeyXml">The public key XML string.</param>
+            <param name="endpointConfigurationName">The name of the endpoint in the application configuration file.</param>
+            <remarks>The <see cref="O:DevZest.Licensing.LicenseClient.PublicKeyXmlFromAssembly">LicenseClient.PublicKeyXmlFromAssembly</see> method returns
+            the public key XML string for specified assembly.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="publicKeyXml"/> is <see langword="null" /> or empty string.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.#ctor(System.String,System.ServiceModel.Channels.Binding,System.ServiceModel.EndpointAddress)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicenseClient" /> class using the specified public key XML string,
+            binding and target address.</summary>
+            <param name="publicKeyXml">The public key XML string.</param>
+            <param name="binding">The binding with which to make calls to the service.</param>
+            <param name="remoteAddress">The address of the service endpoint.</param>
+            <remarks>The <see cref="O:DevZest.Licensing.LicenseClient.PublicKeyXmlFromAssembly">LicenseClient.PublicKeyXmlFromAssembly</see> method returns
+            the public key XML string for specified assembly.</remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="publicKeyXml"/> is <see langword="null" /> or empty string.</exception>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.GetLicense(System.String,System.Version,DevZest.Licensing.LicenseKey,System.String,System.String,System.String,System.String,System.String)">
+            <overloads>Gets <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" />.</overloads>
+            <summary>Gets <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" /> using current thread's culture.</summary>
+            <param name="product">The product name.</param>
+            <param name="version">The product version.</param>
+            <param name="licenseKey">The license key.</param>
+            <param name="category">The license category.</param>
+            <param name="name">The user name.</param>
+            <param name="company">The user company.</param>
+            <param name="email">The user email address.</param>
+            <param name="data">The data to set in the license.</param>
+            <returns>The response from <see cref="T:DevZest.Licensing.LicensePublisher" /> which encapsulates a <see cref="T:DevZest.Licensing.License" /> object or
+            an error message.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.GetLicense(System.Globalization.CultureInfo,System.String,System.Version,DevZest.Licensing.LicenseKey,System.String,System.String,System.String,System.String,System.String)">
+            <summary>Gets <see cref="T:DevZest.Licensing.License" /> from <see cref="T:DevZest.Licensing.LicensePublisher" /> using specified culture.</summary>
+            <param name="cultureInfo">The specified culture information.</param>
+            <param name="product">The product name.</param>
+            <param name="version">The product version.</param>
+            <param name="licenseKey">The license key.</param>
+            <param name="category">The license category.</param>
+            <param name="name">The user name.</param>
+            <param name="company">The user company.</param>
+            <param name="email">The user email address.</param>
+            <param name="data">The data to set in the license.</param>
+            <returns>The response from <see cref="T:DevZest.Licensing.LicensePublisher" /> which encapsulates a <see cref="T:DevZest.Licensing.License" /> object or
+            an error message.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.PublicKeyXmlFromAssembly(System.Reflection.Assembly)">
+            <overloads>Gets public key XML string from specified assembly.</overloads>
+            <summary>Gets public key XML string from specified assembly.</summary>
+            <param name="assembly">The specified assembly.</param>
+            <returns>The public key XML. <see langword="null" /> if assembly is not signed with a strong name.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseClient.PublicKeyXmlFromAssembly(System.String)">
+            <summary>Gets public key XML string from specified assembly file.</summary>
+            <param name="assemblyPath">The full path of the assembly file.</param>
+            <returns>The public key XML. <see langword="null" /> if assembly is not signed with a strong name.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicensePublisher">
+            <summary>Publishes signed licenses to <see cref="T:DevZest.Licensing.LicenseClient"/>.</summary>
+            <remarks>
+            <para><see cref="T:DevZest.Licensing.ILicensePublisher" /> interface is the service contract between <see cref="T:DevZest.Licensing.LicensePublisher" /> and
+            <see cref="T:DevZest.Licensing.LicenseClient" />. <see cref="T:DevZest.Licensing.LicensePublisher" /> class implements <see cref="T:DevZest.Licensing.ILicensePublisher"/> interface throught
+            the public <see cref="M:DevZest.Licensing.LicensePublisher.Publish(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">Publish</see> method. The service class derived from <see cref="T:DevZest.Licensing.LicensePublisher" /> can
+            be hosted as traditional ASP.Net web service, or WCF (Windows Communication Foundation) service.</para>
+            <para>The <see cref="T:DevZest.Licensing.LicensePublisher" /> class, together with <see cref="T:DevZest.Licensing.LicenseClient" /> class, handles license signing,
+            data serialization/deserialization, data encryption/descryption, and exception handling. Sensitive data communicated between
+            <see cref="T:DevZest.Licensing.LicenseClient" /> and <see cref="T:DevZest.Licensing.LicensePublisher" />, such as license key and published license, are encrypted so that no
+            SSL is required.</para>
+            <para><see cref="T:DevZest.Licensing.LicensePublisher" /> derived service class must override <see cref="M:DevZest.Licensing.LicensePublisher.GetLicense(System.Globalization.CultureInfo,System.String,System.Version,DevZest.Licensing.LicenseKey,System.String,System.String,System.String,System.String,System.String)">GetLicense</see> and
+            <see cref="M:DevZest.Licensing.LicensePublisher.GetPrivateKeyXml(System.String)">GetPrivateKeyXml</see> methods. The overrided <see cref="M:DevZest.Licensing.LicensePublisher.GetPrivateKeyXml(System.String)">GetPrivateKeyXml</see>
+            must return the same private key used to sign the coresponding product assembly, to sign the published license.</para>
+            </remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.#ctor">
+            <overloads>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicensePublisher" /> class.</overloads>
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicensePublisher" /> class that caches the private key.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.#ctor(System.Boolean)">
+            <summary>Initializes a new instance of the <see cref="T:DevZest.Licensing.LicensePublisher" /> class, given a value indicating whether the
+            private key should be cached.</summary>
+            <param name="cachePrivateKey">A <see langword="bool" /> value indicating whether the private key should be cached.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.GetPrivateKeyXml(System.String)">
+            <summary>Gets the private key XML string for the specified product.</summary>
+            <param name="product">The specified product.</param>
+            <returns>The XML string of the private key.</returns>
+            <remarks>
+            <para>The XML string of the private key, which was used to sign the assembly corresponding the product name, should be returned by
+            the derived class. If wrong private key is returned, the signed license can not be validated.</para>
+            <para>The derived class can call <see cref="O:DevZest.Licensing.LicensePublisher.PrivateKeyXmlFromSnkFile">PrivateKeyXmlFromSnkFile</see>
+            to get private key XML string from a .snk file or stream.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.GetLicense(System.Globalization.CultureInfo,System.String,System.Version,DevZest.Licensing.LicenseKey,System.String,System.String,System.String,System.String,System.String)">
+            <summary>Gets the requested license.</summary>
+            <param name="cultureInfo">The license client culture.</param>
+            <param name="product">The product name.</param>
+            <param name="version">The product version.</param>
+            <param name="licenseKey">The license key.</param>
+            <param name="category">The license category.</param>
+            <param name="name">The user name.</param>
+            <param name="company">The user company.</param>
+            <param name="email">The user email address.</param>
+            <param name="data">The data to set for the license.</param>
+            <returns>The requested <see cref="T:DevZest.Licensing.License" /> or an error message encapsulated in a <see cref="T:DevZest.Licensing.LicensePublisherResponse" /> object.</returns>
+            <remarks>The error message should respect the provided client culture.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.Publish(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>Gets the requested license.</summary>
+            <param name="culture">The license client culture LCID.</param>
+            <param name="product">The product name.</param>
+            <param name="version">The product version.</param>
+            <param name="encryptedLicenseKey">The encrypted license key.</param>
+            <param name="category">The license category.</param>
+            <param name="name">The user name.</param>
+            <param name="company">The user company.</param>
+            <param name="email">The user email address.</param>
+            <param name="data">The data to set for the license.</param>
+            <returns>The response sent to license client.</returns>
+            <remarks>This method is implemented as web service method accessible to license client. To secure the communication between
+            <see cref="T:DevZest.Licensing.LicenseClient"/> and <see cref="T:DevZest.Licensing.LicensePublisher" />, the license key is encrypted by the public key of the assembly,
+            and the response is encrypted by the license key. No SSL is required to host this web service.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.PrivateKeyXmlFromSnkFile(System.String)">
+            <overloads>Gets the private key XML string from Strong Name Key (.snk) file or stream.</overloads>
+            <summary>Gets the private key XML string from Strong Name Key (.snk) file.</summary>
+            <param name="snkFilePath">Full path and name of the .snk file.</param>
+            <returns>The private key XML string.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.LicensePublisher.PrivateKeyXmlFromSnkFile(System.IO.Stream)">
+            <summary>Gets the private key XML string from Strong Name Key (.snk) stream.</summary>
+            <param name="stream">The stream of .snk file.</param>
+            <returns>The private key XML string.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.License">
+            <summary>Provides the abstract base class for all licenses. A license is granted to an assembly signed with a strong name.</summary>
+            <remarks>
+            <para>A <see cref="T:DevZest.Licensing.License" /> is created and signed by <see cref="T:DevZest.Licensing.LicensePublisher" /> which normally implemented as web service. The
+            <see cref="T:DevZest.Licensing.LicenseClient" /> communicates with the <see cref="T:DevZest.Licensing.LicensePublisher" />, gets the published license and stores it somewhere
+            that can be loaded by the <see cref="T:DevZest.Licensing.LicenseProviderAttribute">LicenseProvider</see> declared as assembly attribute. To determine whether
+            an assembly can be granted a valid license, the license provider attributes are retrieved to provide an instance of <see cref="T:DevZest.Licensing.License" />
+            object containing a collection of <see cref="T:DevZest.Licensing.LicenseItem" /> objects. The validation is then performed on the <see cref="T:DevZest.Licensing.License" />
+            object and the <see cref="T:DevZest.Licensing.LicenseItem" /> object matching the specified license item name.</para>
+            <para>Before performing the validation on the <see cref="T:DevZest.Licensing.LicenseItem" /> object, the license provider seals the <see cref="T:DevZest.Licensing.License" />
+            object by setting its <see cref="P:DevZest.Licensing.Freezable`1.IsFrozen" /> property to <see langword="true" />. Any attempting to modify the
+            <see cref="T:DevZest.Licensing.License" /> object throws an <see cref="T:System.InvalidOperationException" />. All derived classes should respect this rule by
+            calling <see cref="M:DevZest.Licensing.Freezable`1.VerifyFrozenAccess">VerifyFrozenAccess</see> in all public methods and property setters that might
+            modify the object.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.License.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DevZest.Licensing.License" /> class
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.License.Assembly">
+            <summary>Gets the assembly this license is granted to.</summary>
+            <value>The assembly this license is granted to.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.Provider">
+            <summary>Gets the license provider which provides this license. License providers are declared as assembly level attributes.</summary>
+            <value>The license provider which provides this license.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.IsFrozen">
+            <exclude />
+        </member>
+        <member name="P:DevZest.Licensing.License.ProviderData">
+            <summary>Gets the data set by the license provider.</summary>
+            <value>The data set by license provider.</value>
+            <remarks>The license provider may provide additional data for validation. For example, the assembly license provider sets this
+            property to the calling assembly object.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.SignedString">
+            <summary>Gets or sets the XAML string that can be converted from/to this <see cref="T:DevZest.Licensing.License" /> object, signed by the assembly private key.</summary>
+            <value>The XAML string that can be converted from/to this <see cref="T:DevZest.Licensing.License" /> object, signed by the assembly private key.
+            This property is set by the license provider.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.Id">
+            <summary>Gets or sets the license ID information.</summary>
+            <value>A string containing the license ID information.</value>
+            <remarks>This value is set by license publisher to identify this license. It does not participate the validateion process.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.Category">
+            <summary>Gets or sets the license category information.</summary>
+            <value>A string containing the license category information.</value>
+            <remarks>The license publisher uses this category value to publish different kind of licenses. This value does not
+            participate the validation process.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.Product">
+            <summary>Gets or sets product name information.</summary>
+            <value>A string containing the product name.</value>
+            <remarks>The validation will compare this property with the <see cref="P:System.Reflection.AssemblyProductAttribute.Product"/> property of the
+            assembly level <see cref="T:System.Reflection.AssemblyProductAttribute" />.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.Company">
+            <summary>Gets or sets product company information.</summary>
+            <value>A string containing the product company name.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.Items">
+            <summary>Gets a collection of <see cref="T:DevZest.Licensing.LicenseItem" /> objects.</summary>
+            <value>A <see cref="T:DevZest.Licensing.LicenseItemCollection" /></value>
+        </member>
+        <member name="P:DevZest.Licensing.License.Item(System.String)">
+            <summary>Gets the <see cref="T:DevZest.Licensing.LicenseItem" /> object for specified name.</summary>
+            <param name="name">The name of the <see cref="T:DevZest.Licensing.LicenseItem"/> object.</param>
+            <value>The <see cref="T:DevZest.Licensing.LicenseItem" /> object.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.UserName">
+            <summary>Gets or sets the user name information.</summary>
+            <value>A string containing the user name information.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.UserCompany">
+            <summary>Gets or sets the user company information.</summary>
+            <value>A string containing the user company information.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.Expiration">
+            <summary>Gets or sets the expiration date, as string, of this license.</summary>
+            <value>A string containing the expiration date of this license, in the format of "yyyy/mm/dd".</value>
+            <remarks>The value will be converted to UTC date.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.ExpirationDate">
+            <summary>Gets the expiration date of this license.</summary>
+            <value>The UTC date of the license expiration.</value>
+        </member>
+        <member name="M:DevZest.Licensing.License.SetExpirationDate(System.DateTime)">
+            <summary>Sets the expiration date of this license.</summary>
+            <param name="date">The date of the license expiration.</param>
+            <remarks>The provided date will be converted to UTC date.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.IsExpired">
+            <summary>Gets a value indicating whether this license is expired.</summary>
+            <value><see langword="true"/> if this license is expired, otherwise <see langword="false"/>.</value>
+        </member>
+        <member name="P:DevZest.Licensing.License.UpgradeExpiration">
+            <summary>Gets or sets the upgrade expiration date, as string, of this license.</summary>
+            <value>A string containing the upgrade expiration date of this license, in the format of "yyyy/mm/dd".</value>
+            <remarks>When validating, the release date of the assembly will be compared with the upgrade exipration date of the license.
+            The assembly version Build number specifies the release date as number of days since 2000/01/01.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.UpgradeExpirationDate">
+            <summary>Gets the upgrade expiration date of this license.</summary>
+            <value>The UTC date of the license upgrade expiration.</value>
+            <remarks>When validating, the release date of the assembly will be compared with the upgrade exipration date of the license.
+            The assembly version Build number specifies the release date as number of days since 2000/01/01.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.License.SetUpgradeExpirationDate(System.DateTime)">
+            <summary>Sets the upgrade expiration date of this license.</summary>
+            <param name="date">The date of the license upgrade expiration.</param>
+            <remarks>The provided date will be converted to UTC date.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.License.Data">
+            <summary>Gets or sets the data that the validation is performed against.</summary>
+            <value>A string containing the data that the validation is performed against.</value>
+        </member>
+        <member name="M:DevZest.Licensing.License.Validate">
+            <summary>Determines whether valid license can be granted.</summary>
+            <returns><see langword="null" /> if a valid license can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+        </member>
+        <member name="M:DevZest.Licensing.License.LoadFromXaml(System.String)">
+            <summary>Loads the license from XAML string.</summary>
+            <param name="xaml">The XAML string, returned by license publisher without signature.</param>
+            <returns>The <see cref="T:DevZest.Licensing.License" /> object.</returns>
+            <remarks>This method provides <see cref="T:DevZest.Licensing.License" /> object for analysis purpose only, such as in License Console application.
+            Validating against this license throws an <see cref="T:System.InvalidOperationException" />. </remarks>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseItem">
+            <summary>Represents a feature of <see cref="P:DevZest.Licensing.LicenseItem.License" /> granted to an assembly.</summary>
+            <remarks>
+            <para>A <see cref="P:DevZest.Licensing.LicenseItem.License" /> is created and signed by <see cref="T:DevZest.Licensing.LicensePublisher" /> which normally implemented as web service. The
+            <see cref="T:DevZest.Licensing.LicenseClient" /> communicates with the <see cref="T:DevZest.Licensing.LicensePublisher" />, gets the published license and stores it somewhere
+            that can be loaded by the <see cref="T:DevZest.Licensing.LicenseProviderAttribute">LicenseProvider</see> declared as assembly attribute. To determine whether
+            an assembly can be granted a valid license, the license provider attributes are retrieved to provide an instance of <see cref="P:DevZest.Licensing.LicenseItem.License" />
+            object containing a collection of <see cref="T:DevZest.Licensing.LicenseItem" /> objects. The validation is then performed on the <see cref="P:DevZest.Licensing.LicenseItem.License" />
+            object and the <see cref="T:DevZest.Licensing.LicenseItem" /> object matching the specified license item name.</para>
+            <para>Before performing the validation on the <see cref="T:DevZest.Licensing.LicenseItem" /> object, the containing <see cref="P:DevZest.Licensing.LicenseItem.License" /> object seals it
+            by setting its <see cref="P:DevZest.Licensing.Freezable`1.IsFrozen" /> property to <see langword="true" />. Any attempting to modify
+            the <see cref="T:DevZest.Licensing.LicenseItem" /> object throws an <see cref="T:System.InvalidOperationException" />. All derived classes should respect this rule by
+            calling <see cref="M:DevZest.Licensing.Freezable`1.VerifyFrozenAccess">VerifyFrozenAccess</see> first in all public methods and property setters that might
+            modify the object.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItem.#ctor">
+            <overloads>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItem" /> class.</overloads>
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItem" /> class.</summary>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItem.#ctor(System.String)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItem" /> class using specified name.</summary>
+            <param name="name">The name of the license item.</param>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItem.#ctor(System.String,System.Boolean)">
+            <summary>Initializes a new instance of <see cref="T:DevZest.Licensing.LicenseItem" /> class using specified name, with a <see cref="T:System.Boolean" /> value
+            indicates whether this <see cref="T:DevZest.Licensing.LicenseItem" /> should ignore its containing <see cref="P:DevZest.Licensing.LicenseItem.License" /> object's 
+            <see cref="P:DevZest.Licensing.License.ExpirationDate"/> property.</summary>
+            <param name="name">The name of the license item.</param>
+            <param name="overrideExpirationDate">A <see cref="T:System.Boolean" /> value indicates where this <see cref="T:DevZest.Licensing.LicenseItem" /> should ignore
+            its containing <see cref="P:DevZest.Licensing.LicenseItem.License" /> object's <see cref="P:DevZest.Licensing.License.Expiration"/> property. The default value is
+            <see langword="false" />.</param>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItem.License">
+            <summary>Gets the containing <see cref="T:DevZest.Licensing.License" /> of this <see cref="T:DevZest.Licensing.LicenseItem" /> object.</summary>
+            <value>The containing <see cref="T:DevZest.Licensing.License" />.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItem.IsFrozen">
+            <exclude />
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItem.Name">
+            <summary>Gets the name of this <see cref="T:DevZest.Licensing.LicenseItem" />.</summary>
+            <value>The name of this <see cref="T:DevZest.Licensing.LicenseItem" />.</value>
+            <remarks>This property is used to match the license item name specified by <see cref="O:DevZest.Licensing.LicenseManager.Validate">
+            LicenseManager.Validate</see> or <see cref="O:DevZest.Licensing.LicenseManager.Check">LicenseManager.Check</see>.
+            Adding a <see cref="T:DevZest.Licensing.LicenseItem" /> into a <see cref="T:DevZest.Licensing.LicenseItemCollection" /> with its <see cref="P:DevZest.Licensing.LicenseItem.Name" /> property set to
+            <see langword="null" /> or empty string throws <see cref="T:System.InvalidOperationException" />.</remarks>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItem.OverrideExpirationDate">
+            <summary>Gets a value indicates whether this <see cref="T:DevZest.Licensing.LicenseItem" /> should ignore its containing 
+            <see cref="P:DevZest.Licensing.LicenseItem.License" /> object's <see cref="P:DevZest.Licensing.License.ExpirationDate"/> property.</summary>
+            <value><see langword="true"/> if this <see cref="T:DevZest.Licensing.LicenseItem" /> should ignore its containing <see cref="P:DevZest.Licensing.LicenseItem.License" /> object's
+            <see cref="P:DevZest.Licensing.License.ExpirationDate"/> property, otherwise <see langword="false"/>. The default value is
+            <see langword="false" />.</value>
+            <remarks>Setting this property to <see langword="true" /> makes this <see cref="T:DevZest.Licensing.LicenseItem" /> never expired, even its containing
+            <see cref="P:DevZest.Licensing.LicenseItem.License" /> expired.</remarks>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItem.Validate">
+            <summary>Determines whether a valid license can be granted.</summary>
+            <returns><see langword="null" /> if a valid license can be granted. Otherwise a <see cref="T:DevZest.Licensing.LicenseError" />
+            indicates the error.</returns>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseItemCollection">
+            <summary>Represents a collection of <see cref="T:DevZest.Licensing.LicenseItem"/> objects.</summary>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItemCollection.License">
+            <summary>Gets the containing <see cref="P:DevZest.Licensing.LicenseItemCollection.License" />.</summary>
+            <value>The <see cref="P:DevZest.Licensing.LicenseItemCollection.License" /> object contains this <see cref="T:DevZest.Licensing.LicenseItemCollection" />.</value>
+        </member>
+        <member name="P:DevZest.Licensing.LicenseItemCollection.Item(System.String)">
+            <summary>Gets the license item for specified name.</summary>
+            <param name="name">The specified license item name.</param>
+            <value>A <see cref="T:DevZest.Licensing.LicenseItem"/> object matches the specified license item name. <see langword="null" /> if
+            no <see cref="T:DevZest.Licensing.LicenseItem" /> found.</value>
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemCollection.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <exclude />
+        </member>
+        <member name="M:DevZest.Licensing.LicenseItemCollection.ClearItems">
+            <exclude/>
+        </member>
+        <member name="T:DevZest.Licensing.LicenseErrorReason">
+            <summary>Specifies the reason that fails the license validation.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.LicenseErrorReason.NullLicense">
+            <summary>The assembly is not licensed.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.LicenseErrorReason.InvalidLicense">
+            <summary>The license is invalid.</summary>
+        </member>
+        <member name="F:DevZest.Licensing.LicenseErrorReason.ExpiredLicense">
+            <summary>The license is expired.</summary>
+        </member>
+        <member name="T:DevZest.Licensing.SR">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_CanNotVerifySignedLicense">
+            <summary>
+              Looks up a localized string similar to Can not verify signed license..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_DuplicateLicenseItemName">
+            <summary>
+              Looks up a localized string similar to Can not have duplicate name in LicenseItemCollection. Name={0}..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_EmptyLicenseItemName">
+            <summary>
+              Looks up a localized string similar to The Name property of LicenseItem object can not be null or empty string when added to License. Index={0}..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_EmptyLicenseProviderResult">
+            <summary>
+              Looks up a localized string similar to The returned LicenseProviderResult cannot be empty..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_FrozenAccess">
+            <summary>
+              Looks up a localized string similar to The object is frozen and cannot be modified..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_InvalidLicenseKey">
+            <summary>
+              Looks up a localized string similar to The license key &quot;{0}&quot; is invalid..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_InvalidLoaderType">
+            <summary>
+              Looks up a localized string similar to The provided loader type must be IAssemblyLicenseLoader..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_LicenseMustBeFrozenBeforeValidate">
+            <summary>
+              Looks up a localized string similar to The license must be frozen before validate..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_NullPrivateKey">
+            <summary>
+              Looks up a localized string similar to The private key for product &quot;{0}&quot; is null..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Exception_NullPublicKey">
+            <summary>
+              Looks up a localized string similar to The public key for the assembly &quot;{0}&quot; is null. Make sure the assembly is signed with a strong name..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_AssemblySignedWithSameKey">
+            <summary>
+              Looks up a localized string similar to The assembly &quot;{0}&quot; is signed with the same key. Validation completed successfully..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_EmbeddedResourceNotFound">
+            <summary>
+              Looks up a localized string similar to The embedded resource &quot;{0}&quot; not found..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_EmptyFile">
+            <summary>
+              Looks up a localized string similar to The file is empty..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_EmptyRegistryValue">
+            <summary>
+              Looks up a localized string similar to The registry value is empty..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_ExpiredLicense">
+            <summary>
+              Looks up a localized string similar to The license is expired. The expiration date is &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_FileNotFound">
+            <summary>
+              Looks up a localized string similar to File not found..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_InvalidAssemblyData">
+            <summary>
+              Looks up a localized string similar to The assembly data is invalid..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_InvalidMachineData">
+            <summary>
+              Looks up a localized string similar to The machine data is invalid..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_InvalidProductName">
+            <summary>
+              Looks up a localized string similar to The product name &quot;{0}&quot; is invalid..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_InvalidUserData">
+            <summary>
+              Looks up a localized string similar to The user data is invalid..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_LicenseError">
+             <summary>
+               Looks up a localized string similar to License Verification Error:
+            Assembly: {0}
+            Reason: {1}
+            Message: {2}
+            License:
+            {3} .
+             </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_NoMatchingLicenseItem">
+            <summary>
+              Looks up a localized string similar to There is no matching license item found for item name &quot;{0}&quot;..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_NullLicense">
+            <summary>
+              Looks up a localized string similar to The assembly is not properly licensed. The returned license is null..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_OpenRegistryKeyFailed">
+            <summary>
+              Looks up a localized string similar to Open registry key failed..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_ReadFileFailed">
+            <summary>
+              Looks up a localized string similar to Reading file failed: {0}..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_ReadResgistryFailed">
+            <summary>
+              Looks up a localized string similar to Failed reading registry: {0}..
+            </summary>
+        </member>
+        <member name="P:DevZest.Licensing.SR.Message_UpgradeExpired">
+            <summary>
+              Looks up a localized string similar to Upgrade expired on &quot;{0}&quot;: cannot use current version released on &quot;{1}&quot;..
+            </summary>
+        </member>
+        <member name="T:DevZest.Licensing.MachineLicense">
+            <summary>Represents the license that can be validated against the local machine.</summary>
+            <remarks><para>When publishing an <see cref="T:DevZest.Licensing.MachineLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="P:DevZest.Licensing.MachineLicense.LocalMachineData">MachineLicense.LocalMachineData</see>, otherwise the validation will always fail.</para>
+            <para><see cref="T:DevZest.Licensing.MachineLicense" /> uses DPAPI to encrypt a known GUID as its <see cref="P:DevZest.Licensing.License.Data" /> property. The validation
+            is to decrypt the <see cref="P:DevZest.Licensing.License.Data" /> property, compare it with the known GUID. It requires <see cref="T:System.Security.Permissions.DataProtectionPermission" />.
+            If your application or component is target partial trust environment without <see cref="T:System.Security.Permissions.DataProtectionPermission" />, use
+            <see cref="T:DevZest.Licensing.UserLicense" /> instead.</para></remarks>
+        </member>
+        <member name="M:DevZest.Licensing.MachineLicense.Validate">
+            <exclude />
+        </member>
+        <member name="P:DevZest.Licensing.MachineLicense.LocalMachineData">
+            <summary>Gets the data for local machine.</summary>
+            <value>A <see cref="T:System.String" /> value containing the data for local machine.</value>
+            <remarks><para>When publishing an <see cref="T:DevZest.Licensing.MachineLicense" />, the <see cref="P:DevZest.Licensing.License.Data" /> property should be set as the string
+            value returned by <see cref="P:DevZest.Licensing.MachineLicense.LocalMachineData">MachineLicense.LocalMachineData</see>, otherwise the validation will always fail.</para>
+            <para><see cref="T:DevZest.Licensing.MachineLicense" /> uses DPAPI to encrypt a known GUID as its <see cref="P:DevZest.Licensing.License.Data" /> property. The validation
+            is to decrypt the <see cref="P:DevZest.Licensing.License.Data" /> property, compare it with the known GUID. It requires <see cref="T:System.Security.Permissions.DataProtectionPermission" />.
+            If your application or component is target partial trust environment without <see cref="T:System.Security.Permissions.DataProtectionPermission" />, use
+            <see cref="T:DevZest.Licensing.UserLicense" /> instead.</para></remarks>
+        </member>
+    </members>
+</doc>

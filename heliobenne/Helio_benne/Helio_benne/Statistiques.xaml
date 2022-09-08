@@ -1,0 +1,28 @@
+﻿<Page x:Class="Helio_benne.Statistiques"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Helio_benne"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="750"
+      Title="Statistiques">
+    <Page.Resources>
+        <ImageBrush x:Key="ImageBrush" ImageSource="Images/glossy_button_blank_green_rectangle_T.png" Stretch="UniformToFill"/>
+    </Page.Resources>
+
+    <Grid Background="#FFECF3E9">
+        <Grid.Resources>
+            <ImageBrush x:Key="ImageBrush" ImageSource="Images/glossy_button_blank_green_rectangle_T.png" Stretch="UniformToFill"/>
+        </Grid.Resources>
+        <Button x:Name="accueil" Content="Accueil" FontSize="18" FontWeight="Bold" FontStyle="Normal" FontFamily="Comic Sans MS" Background="{StaticResource ImageBrush}" HorizontalAlignment="Left" Margin="15,60,0,0" VerticalAlignment="Top" Width="110" Height="65" Click="buttonAccueil"/>
+        <Button x:Name="heliobennes" Content="H-B" FontSize="18" FontWeight="Bold" FontStyle="Normal" FontFamily="Comic Sans MS" Background="{StaticResource ImageBrush}" HorizontalAlignment="Left" Margin="15,140,0,0" VerticalAlignment="Top" Width="110" Height="65" Click="buttonHB"/>
+        <Button x:Name="etat" Content="Etat" FontSize="18" FontWeight="Bold" FontStyle="Normal" FontFamily="Comic Sans MS" Background="{StaticResource ImageBrush}" HorizontalAlignment="Left" Margin="15,220,0,0" VerticalAlignment="Top" Width="110" Height="65" Click="buttonEtat"/>
+        <Button x:Name="trajet" Content="Trajet" FontSize="18" FontWeight="Bold" FontStyle="Normal" FontFamily="Comic Sans MS" Background="{StaticResource ImageBrush}" HorizontalAlignment="Left" Margin="15,300,0,0" VerticalAlignment="Top" Width="110" Height="65" Click="buttonTrajet"/>
+        <Button x:Name="statistiques" Content="Statistiques" FontSize="18" FontWeight="Bold" FontStyle="Normal" FontFamily="Comic Sans MS" Background="{StaticResource ImageBrush}" HorizontalAlignment="Left" Margin="15,380,0,0" VerticalAlignment="Top" Width="110" Height="65" Click="buttonStatistiques"/>
+        <TextBlock x:Name="titrestatistiques" FontFamily="Gigi" HorizontalAlignment="Left" Margin="300,25,0,0" TextWrapping="Wrap" FontSize="40" FontWeight="Bold" VerticalAlignment="Top" Height="49" Width="220"><Run Text="Statistiques"/></TextBlock>
+        <Button x:Name="buttondeconnexion" Content="Déconnexion" FontSize="18" FontWeight="ExtraBold" FontFamily="Comic sans ms" HorizontalAlignment="Left" Margin="13,10,0,0" VerticalAlignment="Top" Width="113" Click="buttondeconnexion_Click" Height="39" Background="#FFFF1700"/>
+        <WebBrowser x:Name="webBrowser2" HorizontalAlignment="Left" Height="419" Margin="132,75,0,0" VerticalAlignment="Top" Width="609"/>
+
+    </Grid>
+</Page>

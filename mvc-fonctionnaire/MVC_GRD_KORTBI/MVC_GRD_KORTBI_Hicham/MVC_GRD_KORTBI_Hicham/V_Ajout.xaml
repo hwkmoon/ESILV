@@ -1,0 +1,30 @@
+﻿<Window x:Class="MVC_GRD_KORTBI_Hicham.V_Ajout"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVC_GRD_KORTBI_Hicham"
+        mc:Ignorable="d"
+        Title="V_Ajout" Height="380" Width="550">
+    <Grid>
+        <Grid.Resources>
+            <ImageBrush x:Key="ImageBrush" ImageSource="Backgrounds/Home_logo.png" Stretch="UniformToFill"/>
+            <ImageBrush x:Key="ImageBrush1" ImageSource="Backgrounds/power-off-icon-md.png" Stretch="Uniform"/>
+        </Grid.Resources>
+        <Button x:Name="home" Content="" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="68" Height="60" Background="{StaticResource ImageBrush}" Click="home_Click"/>
+        <Button x:Name="quitter" Content="" HorizontalAlignment="Left" Margin="447,290,0,0" VerticalAlignment="Top" Width="59" Height="42" Background="{StaticResource ImageBrush1}" Click="quitter_Click"/>
+        <TextBox x:Name="textbox2" HorizontalAlignment="Left" Margin="90,100,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxNom,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="120"/>
+        <TextBlock x:Name="nom" HorizontalAlignment="Left" Margin="130,75,0,0" TextWrapping="Wrap" Text="Nom" FontSize="14" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox3" HorizontalAlignment="Left" Margin="340,100,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxPrenom,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="120"/>
+        <TextBlock x:Name="prenom" HorizontalAlignment="Left" Margin="365,75,0,0" TextWrapping="Wrap" Text="Prénom" VerticalAlignment="Top" FontSize="14"/>
+        <TextBlock x:Name="poste" HorizontalAlignment="Left" Margin="60,170,0,0" TextWrapping="Wrap" Text="Poste" FontSize="14" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox4" HorizontalAlignment="Left" Margin="25,190,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxPoste,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Height="25" Width="120" TextChanged="textBoxPoste_TextChanged"/>
+        <TextBlock x:Name="departement" HorizontalAlignment="Left" Margin="220,170,0,0" TextWrapping="Wrap" Text="Département" FontSize="14" VerticalAlignment="Top"/>
+        <TextBox x:Name="textbox5" HorizontalAlignment="Left" Height="25" Margin="200,190,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxDpt,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textbox6" HorizontalAlignment="Left" Height="25" Margin="375,190,0,0" TextWrapping="Wrap" Text="{Binding Path=TextBoxSalaire,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="salairea" HorizontalAlignment="Left" Margin="390,170,0,0" TextWrapping="Wrap" Text="Salaire Annuel" FontSize="14" VerticalAlignment="Top"/>
+        <TextBlock x:Name="newfonctionnaire" HorizontalAlignment="Left" Margin="186,27,0,0" TextWrapping="Wrap" Text="Nouveau fonctionnaire" FontSize="16" FontWeight="Bold" VerticalAlignment="Top" Height="50" Width="229"/>
+        <Button x:Name="ajouter" Content="Ajouter" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" Margin="160,270,0,0" VerticalAlignment="Top" Width="196" Height="36" Click="ajouter_Click"/>
+
+    </Grid>
+</Window>
